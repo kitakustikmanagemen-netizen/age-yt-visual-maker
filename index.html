@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AGE YT# Visual Maker</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <div class="brand">AGE YT<span>#</span> Visual Maker</div>
+    <div class="subtitle">Thumbnail, Carousel, Meme Card &amp; Prompt Gambar — bertenaga AI</div>
+  </div>
+  <button id="open-settings-btn" class="btn-settings">⚙️ Pengaturan API Key</button>
+</div>
+
+<div class="layout">
+  <nav id="feature-nav"></nav>
+  <section id="form-panel"></section>
+  <section id="result-panel"></section>
+</div>
+
+<!-- Modal Pengaturan API Key -->
+<div class="modal-overlay" id="settings-modal">
+  <div class="modal-box">
+    <h3>⚙️ Pengaturan API Key</h3>
+    <p class="hint">
+      Butuh Gemini API key gratis? Ambil di
+      <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color:var(--current-accent)">aistudio.google.com/app/apikey</a>.
+      Bisa tambah lebih dari 1 key — sistem otomatis pindah ke key berikutnya kalau salah satu kena limit.
+    </p>
+
+    <div id="key-list"></div>
+
+    <div class="key-add-row">
+      <input type="password" id="new-key-input" placeholder="Tempel Gemini API key di sini" />
+      <button id="add-key-btn" class="btn-add">Tambah</button>
+    </div>
+
+    <label class="field-label">Worker URL (opsional, untuk power-user)</label>
+    <input type="password" id="worker-url-input" placeholder="Kosongkan untuk pakai Worker resmi AGE YT#" />
+    <button id="save-worker-btn" class="btn-secondary" style="margin-top:8px;">Simpan Worker URL</button>
+
+    <p class="modal-footer-note">
+      API key &amp; Worker URL disimpan di browser kamu sendiri (localStorage), tidak pernah dikirim ke server pihak ketiga selain langsung ke Google lewat Worker proxy.
+    </p>
+
+    <button id="close-modal-btn" class="btn-close-modal">Tutup</button>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
