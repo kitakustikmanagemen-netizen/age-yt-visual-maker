@@ -1,0 +1,311 @@
+/* ============================================================
+   AGE YT# Visual Maker — style.css
+   Tema "Mixer Panel" — dark mode, LED accent per fitur,
+   panel hasil ala layar readout. Font sistem saja (no external deps).
+   ============================================================ */
+
+:root {
+  --bg-0: #0b0d10;
+  --bg-1: #14171c;
+  --bg-2: #1c2027;
+  --border: #2a2f38;
+  --text-0: #f2f4f7;
+  --text-1: #9aa3af;
+  --current-accent: #5cc9ff;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg-0);
+  color: var(--text-0);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* ------------------ Top bar ------------------ */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: var(--bg-1);
+  border-bottom: 1px solid var(--border);
+}
+.topbar .brand {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+.topbar .brand span { color: var(--current-accent); }
+.topbar .subtitle {
+  font-size: 12px;
+  color: var(--text-1);
+  margin-top: 2px;
+}
+.btn-settings {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--text-0);
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 13px;
+}
+.btn-settings:hover { border-color: var(--current-accent); }
+
+/* ------------------ Layout ------------------ */
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr 1fr;
+  min-height: calc(100vh - 57px);
+}
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  #feature-nav { display: flex; overflow-x: auto; padding: 10px; gap: 8px; }
+  .nav-item { flex: 0 0 auto; }
+}
+
+/* ------------------ Nav (channel strip) ------------------ */
+#feature-nav {
+  background: var(--bg-1);
+  border-right: 1px solid var(--border);
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-1);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-align: left;
+  font-size: 13px;
+}
+.nav-item:hover { background: var(--bg-2); color: var(--text-0); }
+.nav-item.active {
+  background: var(--bg-2);
+  border-color: var(--accent);
+  color: var(--text-0);
+}
+.nav-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  flex-shrink: 0;
+}
+.nav-item.active .nav-led {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+.nav-icon { font-size: 16px; }
+
+/* ------------------ Form panel ------------------ */
+#form-panel {
+  padding: 20px;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+}
+.form-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--accent);
+}
+.form-header h2 { margin: 0; font-size: 17px; }
+.form-icon { font-size: 20px; }
+
+.field-label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-1);
+  margin: 14px 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+textarea, select, input[type="text"], input[type="password"] {
+  width: 100%;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--text-0);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+}
+textarea:focus, select:focus, input:focus {
+  outline: none;
+  border-color: var(--current-accent);
+}
+
+.btn-generate {
+  width: 100%;
+  margin-top: 20px;
+  padding: 13px;
+  border-radius: var(--radius);
+  border: none;
+  background: var(--accent);
+  color: #0b0d10;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+}
+.btn-generate:hover { filter: brightness(1.1); }
+.btn-generate:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ------------------ Result panel (readout) ------------------ */
+#result-panel {
+  padding: 20px;
+  overflow-y: auto;
+  background: repeating-linear-gradient(180deg, var(--bg-0), var(--bg-0) 24px, #0d1013 25px);
+}
+.result-empty, .result-progress {
+  color: var(--text-1);
+  font-family: "SF Mono", Consolas, monospace;
+  font-size: 13px;
+  padding: 20px 0;
+}
+.result-error {
+  color: #ff8080;
+  background: rgba(255, 92, 92, 0.08);
+  border: 1px solid rgba(255, 92, 92, 0.3);
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  font-size: 13px;
+}
+.result-text {
+  font-family: "SF Mono", Consolas, monospace;
+  font-size: 13.5px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+  margin-top: 10px;
+}
+.gallery-item {
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.gallery-item img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+.btn-download {
+  width: 100%;
+  padding: 8px;
+  background: var(--bg-2);
+  border: none;
+  border-top: 1px solid var(--border);
+  color: var(--text-0);
+  font-size: 12px;
+  cursor: pointer;
+}
+.btn-download:hover { color: var(--current-accent); }
+
+.result-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.btn-secondary {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--text-0);
+  padding: 9px 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 13px;
+}
+.btn-secondary:hover { border-color: var(--current-accent); }
+
+/* ------------------ Modal Pengaturan ------------------ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  width: 90%;
+  max-width: 420px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+.modal-box h3 { margin-top: 0; }
+.modal-box .hint {
+  font-size: 12px;
+  color: var(--text-1);
+  margin-bottom: 12px;
+}
+.key-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+.btn-remove-key {
+  background: none;
+  border: none;
+  color: #ff8080;
+  cursor: pointer;
+  font-size: 13px;
+}
+.key-add-row { display: flex; gap: 8px; margin-top: 10px; }
+.key-add-row input { flex: 1; }
+.btn-add {
+  background: var(--current-accent);
+  border: none;
+  color: #0b0d10;
+  padding: 0 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 700;
+}
+.modal-footer-note {
+  font-size: 11px;
+  color: var(--text-1);
+  margin-top: 18px;
+}
+.btn-close-modal {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--text-0);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
